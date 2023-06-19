@@ -11,6 +11,9 @@ html a {
 body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0px 60px;
 }
 
 body hr {
