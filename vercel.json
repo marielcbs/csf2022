@@ -7,13 +7,3 @@
     }
   ]
 }
-
-{
-  "redirects": [
-    {
-      "source": "/csf",
-      "destination": "/",
-      "permanent": true
-    }
-  ]
-}
