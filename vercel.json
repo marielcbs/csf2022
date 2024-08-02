@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    {
+      "source": "/app",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}
+
+{
+  "redirects": [
+    {
+      "source": "/csf",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}
