@@ -7,171 +7,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COLÉGIO SÃO FRANCISCO</title>
 
-    <!--css-->
     <link rel="stylesheet" href="/css/style.css">
-    <!--script-->
+    
+    <style>
+        .download-box {
+            margin-top: 30px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 90%;
+            max-width: 600px;
+        }
+        .download-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
+        }
+        .download-item:last-child { border-bottom: none; }
+        .download-item span {
+            font-weight: 800;
+            font-size: 13px;
+            color: #333;
+            text-transform: uppercase;
+        }
+        .btn-dl {
+            text-decoration: none;
+            color: #1370A5;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .btn-dl:hover { text-decoration: underline; }
+        .download-box h2 { font-size: 22px; margin: 5px 0; color: #000; }
+        .download-box h3 { font-size: 20px; margin: 0 0 15px 0; font-weight: bold; }
+    </style>
 </head>
 
 <body>
 
-    <div style="display: flex; width: 100vw; height: 100vh; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-top: -10px;">
-        <small style="text-align: center;"><strong>A hospedagem do nosso site está passando por manutenção, desde já agradecemos a compreensão de todos.</strong></small>
-    <img style="max-width: 500px; min-width: 240px; width: 100%; margin-bottom: 10px;" src="/assets/logocsf2023.png">
-    <small>Links de acesso aos nossos serviços externos</small>
-    <div style="display: flex; flex-wrap: wrap; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 20px;">
-    <a href="https://www.coc.com.br"><img style="width: 100%;" src="/assets/coc.svg"></a>
-    <a href="https://web.prodados.net.br/ProWeb/SaoFrancisco/Login.aspx?ReturnUrl=%2fProWeb%2fSaoFrancisco"><img style="width: 100%;" src="/assets/boletim.svg"></a>
-    <a href="https://outlook.com/csfba.com.br"><img style="width: 100%;" src="/assets/email.svg"></a>
+    <div style="display: flex; min-height: 100vh; width: 100vw; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 0;">
+        <small style="text-align: center; margin-bottom: 10px;"><strong>A hospedagem do nosso site está passando por manutenção, desde já agradecemos a compreensão de todos.</strong></small>
+        
+        <img style="max-width: 500px; min-width: 240px; width: 100%; margin-bottom: 10px;" src="/assets/logocsf2023.png">
+        
+        <small>Links de acesso aos nossos serviços externos</small>
+        
+        <div style="display: flex; flex-wrap: wrap; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 20px; margin-bottom: 30px;">
+            <a href="https://www.coc.com.br"><img style="width: 100%;" src="/assets/coc.svg"></a>
+            <a href="https://web.prodados.net.br/ProWeb/SaoFrancisco/Login.aspx?ReturnUrl=%2fProWeb%2fSaoFrancisco"><img style="width: 100%;" src="/assets/boletim.svg"></a>
+            <a href="https://outlook.com/csfba.com.br"><img style="width: 100%;" src="/assets/email.svg"></a>
+        </div>
+
+        <div class="download-box">
+            <small style="display: block; margin-bottom: 5px;">Downloads</small>
+            <h2>Ensino Fundamental - 6º ao 9º ANO</h2>
+            <h3>Atualidades</h3>
+
+            <div class="download-item">
+                <span>07 - ATUALIDADES - PORT_TESTE 02 - EF 6º ANO</span>
+                <a href="/downloads/atualidades_6ano.pdf" class="btn-dl" download>download</a>
+            </div>
+
+            <div class="download-item">
+                <span>07 - ATUALIDADES - PORT_TESTE 02 - EF 7º ANO</span>
+                <a href="/downloads/atualidades_7ano.pdf" class="btn-dl" download>download</a>
+            </div>
+
+            <div class="download-item">
+                <span>07 - ATUALIDADES - PORT_TESTE 02 - EF 8º e 9º ANO</span>
+                <a href="/downloads/atualidades_8e9ano.pdf" class="btn-dl" download>download</a>
+            </div>
+        </div>
     </div>
-    </div>
 
-
-
-<!--
-
-    158.69.187.200 ip hospedagem antiga
-    <nav>
-        <div id="side-menu">
-            <div>
-                <a class="icon-menu" href="">
-                    <img src="/assets/images/icon-menu.svg" alt="">
-                </a>
-                <a href="/teacher">
-                    <img src="/assets/images/teacher.svg" alt="">
-                    <h6>PROFESSOR</h6>
-                </a>
-                <a href="/student">
-                    <img src="/assets/images/student.svg" alt="">
-                    <h6>ALUNO</h6>
-                </a>
-            </div>
-
-            <div>
-                <a href="/teacher">
-                    <img src="/assets/images/contact.svg" alt="">
-                    <h6>CONTATO</h6>
-                </a>
-
-                <a href="/student">
-                    <img src="/assets/images/whatsapp.svg" alt="">
-                    <h6>WHATSAPP</h6>
-                </a>
-            </div>
-
-        </div>
-    </nav>
-
-    <main>
-        <div id="menu-top">
-            <a href="/home"><img class="logo" src="/assets/images/logo.svg"></a>
-            <ul>
-                <li><a href="/">O COLÉGIO</a></li>
-                <li><a href="/">NOSSA HISTÓRIA</a></li>
-                <li><a href="/">A CONGREGAÇÃO</a></li>
-                <li style="margin: 6px;"><a href="/"><img src="/assets/images/instagram.svg"></a></li>
-                <li style="margin: 6px;"><a href="/"><img src="/assets/images/youtube.svg"></a></li>
-            </ul>
-        </div>
-        <div id="slide"></div>
-        <div id="parcerias">
-            <img class="icon-st" src="/assets/images/icon-st.svg">
-            <h1 class="title">Parcerias <font>e</font> Diferenciais</h1>
-            <div class="icon-parcerias">
-                <img src="/assets/images/coc.svg" alt="">
-                <img src="/assets/images/amigavelmente.svg" alt="">
-                <img src="/assets/images/office.svg" alt="">
-                <img src="/assets/images/soe.svg" alt="">
-                <img src="/assets/images/sop.svg" alt="">
-                <img src="/assets/images/sas.svg" alt="">
-            </div>
-
-            <hr>
-            <div class="text-parcerias">
-                <div class="left">
-                    <p>“O enorme desafio que se coloca hoje diante da educação é buscar pontos de interlocução com as
-                        velocidades das transformações, redirecionando o seu olhar e refletir sobre as novas descobertas
-                        e avanço, ampliando campos de conhecimento, ao assim fazer, reconfigurar saberes e encontrar
-                        possibilidades de novos caminhos que a tecnologia abre para o mundo”.</p>
-                </div>
-                <div class="right">
-                    <p>O CSF, enquanto instituição social, não pode ficar imune a todas as transformações que ocorrem na
-                        sociedade. Por isso, sem abrir mão de sua missão educativa, alicerçada em princípios cristãos,
-                        assume o desafio de acompanhar as mudanças, procurando possibilidades de novos caminhos que
-                        contribuam para a formação de educandos, engajados nessa realidade.</p>
-                </div>
-            </div>
-        </div>
-        <div class="historia">
-            <h1>71 ANOS DE HISTÓRIA<br><small>Desde 04 de outubro 1951</small></h1>
-        </div>
-        <div class="eventos">
-            <h1 class="title">Eventos <font>e</font> Projetos</h1>
-            <div class="menu-eventos">
-                <div class="event">
-                    <a href="http://">
-                        <img src="/assets/images/eventos/01.png" alt="" srcset="">
-                        <h4>EVENTOS</h4>
-                    </a>
-                </div>
-                <div class="event">
-                    <a href="http://">
-                        <img src="/assets/images/eventos/02.png" alt="" srcset="">
-                        <h4>EVENTOS</h4>
-                    </a>
-                </div>
-                <div class="event">
-                    <a href="http://">
-                        <img src="/assets/images/eventos/03.png" alt="" srcset="">
-                        <h4>EVENTOS</h4>
-                    </a>
-                </div>
-            </div>
-        </div>
-        </div>
-
-        <div class="fale-conosco">
-            <h1 class="title">FALE CONOSCO</h1>
-            <h4 class="title">Como podemos te ajudar?</h4>
-            <div class="container">
-                <div class="aluno">
-                    <div class="title-aluno">
-                        <img src="/assets/images/aluno.svg" alt="">
-                        <h1>ALUNOS</h1>
-                    </div>
-                    <p>Aqui nossos alunos obtém auxílio sobre questões acadêmicas, rematrícula, registram sugestões e
-                        reclamações.</p>
-                </div>
-                <div class="visitante">
-                    <div class="title-visitante">
-                        <img src="/assets/images/visitante.svg" alt="">
-                        <h1>VISITANTE</h1>
-                    </div>
-                    <p>Informações sobre matrículas e agendamento de visitas, ou ainda para solicitar informações sobre
-                        nossa proposta pedagógica, segmentos de ensino, horários e preços.</p>
-                </div>
-            </div>
-            <h4 class="title" style="color: #1370A5">Atendimento Administrativo e Secretaria:</h4>
-            <h5 class="title" style="margin-top: -15px; font-weight: 200; color: #1370A5">De segunda a sexta, das 08h às
-                16h</h5>
-        </div>
-    </main>
-    <footer>
-        <div class="footer">
-            <div>
-                <img src="/assets/images/logo2.svg" alt="">
-            </div>
-            <div class="social">
-                <img src="assets/images/instagram2.svg">
-                <img src="assets/images/youtube2.svg">      
-            </div>
-            <div>
-                <p><img src="/assets/images/phone.svg" alt="">(75) 3031-2495</p>
-                <p>contato@csfba.com.br</p>
-            </div>
-        </div>
-        <hr>
-    </footer>
--->
 </body>
-
 </html>
