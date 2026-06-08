@@ -3,95 +3,59 @@
 import { useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
-function slugFileName(fileName: string) {
-  return fileName
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-zA-Z0-9.-]+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "")
-    .toLowerCase();
+function isValidUrl(value: string) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" || url.protocol === "http:";
+  } catch {
+    return false;
+  }
 }
 
 export default function PdfUpload() {
   const [titulo, setTitulo] = useState("");
   const [categoria, setCategoria] = useState("calendario");
   const [segmento, setSegmento] = useState("infantil");
+  const [arquivoUrl, setArquivoUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const [arquivo, setArquivo] =
-    useState<File | null>(null);
-
-  const [loading, setLoading] =
-    useState(false);
-
-  async function handleUpload() {
+  async function handleSave() {
     try {
       setLoading(true);
 
-      if (!arquivo) {
-        alert("Selecione um PDF");
+      if (!titulo.trim()) {
+        alert("Informe o titulo.");
         return;
       }
 
-      if (
-        arquivo.type !==
-        "application/pdf"
-      ) {
-        alert("Somente PDF");
+      if (!isValidUrl(arquivoUrl.trim())) {
+        alert("Informe um link valido do PDF.");
         return;
       }
 
-      const nomeArquivo =
-        `${Date.now()}-${slugFileName(arquivo.name)}`;
-
-      const caminho =
-        `${segmento}/${nomeArquivo}`;
       const supabase = createSupabaseBrowserClient();
+      const { error } = await supabase.from("arquivos").insert({
+        titulo: titulo.trim(),
+        categoria,
+        segmento,
+        arquivo_url: arquivoUrl.trim(),
+      });
 
-      const { error: uploadError } =
-        await supabase.storage
-          .from("arquivos-escolares")
-          .upload(caminho, arquivo);
+      if (error) {
+        throw error;
+      }
 
-      if (uploadError)
-        throw uploadError;
-
-      const { data } =
-        supabase.storage
-          .from("arquivos-escolares")
-          .getPublicUrl(caminho);
-
-      const publicUrl =
-        data.publicUrl;
-
-      const { error: dbError } =
-        await supabase
-          .from("arquivos")
-          .insert({
-            titulo,
-            categoria,
-            segmento,
-            arquivo_url: publicUrl,
-          });
-
-      if (dbError)
-        throw dbError;
-
-      alert(
-        "Arquivo enviado com sucesso!"
-      );
+      alert("Link cadastrado com sucesso!");
 
       setTitulo("");
-      setArquivo(null);
+      setArquivoUrl("");
     } catch (error) {
       console.error(error);
 
       const message =
-        error instanceof Error
-          ? error.message
-          : "Erro desconhecido";
+        error instanceof Error ? error.message : "Erro desconhecido";
 
-      alert(`Erro ao enviar arquivo: ${message}`);
+      alert(`Erro ao cadastrar link: ${message}`);
     } finally {
       setLoading(false);
     }
@@ -105,27 +69,31 @@ export default function PdfUpload() {
 
       <input
         type="text"
-        placeholder="Título"
+        placeholder="Titulo"
         value={titulo}
-        onChange={(e) =>
-          setTitulo(e.target.value)
-        }
+        onChange={(event) => setTitulo(event.target.value)}
+        className="w-full rounded border p-3"
+      />
+
+      <input
+        type="url"
+        placeholder="Link do PDF no OneDrive"
+        value={arquivoUrl}
+        onChange={(event) => setArquivoUrl(event.target.value)}
         className="w-full rounded border p-3"
       />
 
       <select
         value={categoria}
-        onChange={(e) =>
-          setCategoria(e.target.value)
-        }
+        onChange={(event) => setCategoria(event.target.value)}
         className="w-full rounded border p-3"
       >
         <option value="calendario">
-          Calendário
+          Calendario
         </option>
 
         <option value="horario">
-          Horário
+          Horario
         </option>
 
         <option value="atualidade">
@@ -135,9 +103,7 @@ export default function PdfUpload() {
 
       <select
         value={segmento}
-        onChange={(e) =>
-          setSegmento(e.target.value)
-        }
+        onChange={(event) => setSegmento(event.target.value)}
         className="w-full rounded border p-3"
       >
         <option value="infantil">
@@ -149,28 +115,17 @@ export default function PdfUpload() {
         </option>
 
         <option value="medio">
-          Ensino Médio
+          Ensino Medio
         </option>
       </select>
 
-      <input
-        type="file"
-        accept=".pdf"
-        onChange={(e) =>
-          setArquivo(
-            e.target.files?.[0] || null
-          )
-        }
-      />
-
       <button
-        onClick={handleUpload}
+        type="button"
+        onClick={handleSave}
         disabled={loading}
-        className="rounded bg-[#0f2f5f] px-6 py-3 text-white"
+        className="rounded bg-[#0f2f5f] px-6 py-3 text-white disabled:opacity-70"
       >
-        {loading
-          ? "Enviando..."
-          : "Enviar PDF"}
+        {loading ? "Salvando..." : "Cadastrar link"}
       </button>
     </div>
   );
