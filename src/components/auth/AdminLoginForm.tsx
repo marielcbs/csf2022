@@ -44,7 +44,7 @@ export default function AdminLoginForm() {
     setLoading(false);
 
     if (error) {
-      setMessage("Erro ao enviar o Magic Link. Confira o cadastro no Supabase.");
+      setMessage(`Erro ao enviar o Magic Link: ${error.message}`);
       return;
     }
 
