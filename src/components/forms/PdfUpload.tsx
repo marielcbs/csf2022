@@ -3,6 +3,16 @@
 import { useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
+function slugFileName(fileName: string) {
+  return fileName
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9.-]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+    .toLowerCase();
+}
+
 export default function PdfUpload() {
   const [titulo, setTitulo] = useState("");
   const [categoria, setCategoria] = useState("calendario");
@@ -32,7 +42,7 @@ export default function PdfUpload() {
       }
 
       const nomeArquivo =
-        `${Date.now()}-${arquivo.name}`;
+        `${Date.now()}-${slugFileName(arquivo.name)}`;
 
       const caminho =
         `${segmento}/${nomeArquivo}`;
@@ -76,9 +86,12 @@ export default function PdfUpload() {
     } catch (error) {
       console.error(error);
 
-      alert(
-        "Erro ao enviar arquivo"
-      );
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Erro desconhecido";
+
+      alert(`Erro ao enviar arquivo: ${message}`);
     } finally {
       setLoading(false);
     }
