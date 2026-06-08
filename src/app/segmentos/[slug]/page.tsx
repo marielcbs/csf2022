@@ -6,15 +6,13 @@ type Props = {
   }>;
 };
 
-export default async function SegmentoPage({
-  params,
-}: Props) {
+export default async function SegmentoPage({ params }: Props) {
   const { slug } = await params;
 
   const nomes: Record<string, string> = {
-    infantil: "Educação Infantil e Fundamental I",
+    infantil: "Educacao Infantil e Fundamental I",
     "ef6-9": "Fundamental II",
-    medio: "Ensino Médio",
+    medio: "Ensino Medio",
   };
 
   return (
@@ -23,7 +21,7 @@ export default async function SegmentoPage({
         {nomes[slug] ?? "Segmento"}
       </h1>
 
-      <PdfTabs />
+      <PdfTabs segmento={slug} />
     </main>
   );
 }
