@@ -4,20 +4,17 @@ export default function History() {
   return (
     <section className="bg-[#0f2f5f] py-24 text-white">
       <div className="container-csf text-center">
-        <h2 className="mb-6 text-5xl font-bold">
+        <h2 className="mb-4 text-5xl font-black uppercase">
           74 anos de história
         </h2>
-
-        <p className="mx-auto max-w-3xl text-xl">
-          Formando gerações e construindo
-          um legado de excelência em educação.
+        <p className="mx-auto max-w-3xl text-lg uppercase tracking-[0.2em] text-sky-100">
+          Desde 04 de outubro de 1951
         </p>
-
         <Link
           href="/historia"
-          className="mt-8 inline-block rounded-lg bg-[#d4af37] px-8 py-4 font-semibold text-black"
+          className="mt-8 inline-flex h-12 items-center justify-center rounded-lg bg-white px-6 text-sm font-bold uppercase text-[#0f2f5f] transition hover:bg-sky-50"
         >
-          Conheça Nossa História
+          Nossa história
         </Link>
       </div>
     </section>

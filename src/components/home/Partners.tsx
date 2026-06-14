@@ -1,20 +1,27 @@
-import { parceiros } from "@/data/parceiros";
+import { partners } from "@/data/site";
 
-export default function Values() {
+export default function Partners() {
   return (
-    <section className="py-20 bg-white">
+    <section className="bg-white py-16 md:py-20">
       <div className="container-csf">
-        <h2 className="mb-12 text-center text-4xl font-bold text-[#0f2f5f]">
-          Nossos Diferenciais
+        <h2 className="section-title mb-12 text-center">
+          <strong>Parcerias</strong> e <strong>Diferenciais</strong>
         </h2>
 
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-          {parceiros.map((item) => (
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {partners.map((item) => (
             <div
-              key={item}
-              className="rounded-xl border p-6 text-center shadow-sm transition hover:shadow-lg"
+              key={item.name}
+              className="flex min-h-48 flex-col items-center justify-center rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
             >
-              {item}
+              <img
+                src={item.image}
+                alt={item.name}
+                className="mb-5 h-16 max-w-40 object-contain"
+              />
+              <p className="text-lg font-semibold leading-6 text-[#1582b5]">
+                {item.title}
+              </p>
             </div>
           ))}
         </div>

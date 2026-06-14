@@ -1,38 +1,27 @@
 import Link from "next/link";
-
-const segmentos = [
-  {
-    nome: "Educação Infantil e Fundamental I",
-    slug: "infantil",
-  },
-  {
-    nome: "Fundamental II",
-    slug: "ef6-9",
-  },
-  {
-    nome: "Ensino Médio",
-    slug: "medio",
-  },
-];
+import { studentAreas } from "@/data/site";
 
 export default function Segments() {
   return (
-    <section className="py-20">
+    <section className="py-16 md:py-20" id="segmentos">
       <div className="container-csf">
-        <h2 className="mb-12 text-center text-4xl font-bold text-[#0f2f5f]">
-          Segmentos de Ensino
+        <h2 className="section-title mb-12 text-center">
+          Segmentos de <strong>Ensino</strong>
         </h2>
 
-        <div className="grid gap-8 md:grid-cols-3">
-          {segmentos.map((segmento) => (
+        <div className="grid gap-6 md:grid-cols-2">
+          {studentAreas.map((segmento) => (
             <Link
-              key={segmento.slug}
-              href={`/segmentos/${segmento.slug}`}
-              className="rounded-xl border p-10 shadow-sm transition hover:shadow-xl"
+              key={segmento.href}
+              href={segmento.href}
+              className="rounded-lg border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
             >
-              <h3 className="text-xl font-semibold">
-                {segmento.nome}
+              <h3 className="text-2xl font-bold text-[#1582b5]">
+                {segmento.title}
               </h3>
+              <p className="mt-4 leading-7 text-slate-600">
+                {segmento.description}
+              </p>
             </Link>
           ))}
         </div>

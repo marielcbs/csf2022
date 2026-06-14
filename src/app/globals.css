@@ -2,7 +2,9 @@
 
 :root {
   --csf-blue: #0f2f5f;
+  --csf-sky: #1582b5;
   --csf-gold: #d4af37;
+  --csf-green: #54d500;
   --csf-light: #f8fafc;
 }
 
@@ -13,6 +15,7 @@ html {
 body {
   background: white;
   color: #1f2937;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .container-csf {
@@ -20,4 +23,19 @@ body {
   margin: 0 auto;
   padding-left: 24px;
   padding-right: 24px;
+}
+
+.section-title {
+  color: var(--csf-sky);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+.section-title strong {
+  font-weight: 800;
+}
+
+.hero-band {
+  min-height: min(68vh, 680px);
 }

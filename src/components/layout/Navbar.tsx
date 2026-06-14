@@ -2,45 +2,28 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { quickLinks, studentAreas } from "@/data/site";
 
 const collegeItems = [
-  {
-    title: "Nossa História",
-    description: "Conheça a trajetória da instituição",
-    href: "/historia",
-  },
-  {
-    title: "A Congregação",
-    description: "Saiba sobre os valores franciscanos",
-    href: "/o-colegio",
-  },
-  {
-    title: "Estrutura",
-    description: "Conheça nossas instalações",
-    href: "/o-colegio#estrutura",
-  },
-  {
-    title: "Eventos",
-    description: "Webinars e agenda do colégio",
-    href: "/o-colegio#eventos",
-  },
-  {
-    title: "Contato",
-    description: "Fale conosco",
-    href: "/contato",
-  },
+  { title: "O Colégio", href: "/o-colegio" },
+  { title: "Nossa História", href: "/historia" },
+  { title: "A Congregação", href: "/a-congregacao" },
+  { title: "Segmentos", href: "/#segmentos" },
+  { title: "Fale conosco", href: "/#contato" },
 ];
 
-const studentLinks = [
-  "Ed. Infantil / EF - 1º ao 5º ano",
-  "Ens. Fund - 6º ao 9º ano",
-  "Ens. Médio - 1ª e 2ª série",
-  "Ens. Médio - 3ª série",
+const studentExtraLinks = [
+  { title: "Boletim e Agenda", href: quickLinks.boletim },
+  { title: "Portal COC", href: quickLinks.coc },
+  { title: "Programa PLENO", href: quickLinks.pleno },
+  { title: "HINO - CSF", href: quickLinks.hino },
 ];
 
 export default function Navbar() {
   const [isCollegeOpen, setIsCollegeOpen] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [openPanel, setOpenPanel] = useState<"menu" | "aluno" | "professor" | null>(
+    null,
+  );
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -54,237 +37,242 @@ export default function Navbar() {
     }
 
     document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 bg-white shadow-sm">
-      <div className="border-b border-slate-100">
-        <div className="container-csf flex h-20 items-center justify-between gap-6">
-          <Link href="/" className="flex items-center gap-4" aria-label="CSF">
-            <span className="flex h-14 w-20 items-center justify-center rounded-md border border-slate-200 bg-white text-2xl font-black tracking-normal text-[#0f2f5f] shadow-sm">
-              CSF
-            </span>
-            <span className="h-10 w-px bg-slate-300" aria-hidden="true" />
-            <span className="flex flex-col leading-none">
-              <span className="text-[10px] font-semibold uppercase tracking-normal text-slate-500">
-                Plataforma de Educação
-              </span>
-              <span className="text-2xl font-black tracking-normal text-[#18a64a]">
-                COC
-              </span>
-            </span>
+    <header className="sticky top-0 z-50 bg-white shadow-sm">
+      <div className="container-csf flex h-20 items-center justify-between gap-6">
+        <Link href="/" className="flex items-center" aria-label="CSF">
+          <img
+            src="/csf/logos/LOGOCSF.svg"
+            alt="Colégio São Francisco"
+            className="hidden h-14 w-auto sm:block"
+          />
+          <img
+            src="/csf/logos/LOGOCSFm.svg"
+            alt="Colégio São Francisco"
+            className="h-14 w-auto sm:hidden"
+          />
+        </Link>
+
+        <div className="hidden items-center gap-5 md:flex">
+          <AccessButton
+            icon="/csf/icons/icon_aluno.svg"
+            label="Aluno"
+            onClick={() => setOpenPanel("aluno")}
+          />
+          <AccessButton
+            icon="/csf/icons/icon_professor.svg"
+            label="Professor"
+            onClick={() => setOpenPanel("professor")}
+          />
+        </div>
+
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Principal">
+          <Link className="font-semibold text-[#1582b5]" href="/">
+            Home
           </Link>
-
-          <div className="hidden items-center gap-5 md:flex">
-            <a
-              href="https://web.prodados.net.br/ProWeb/SaoFrancisco/Login.aspx?ReturnUrl=%2fProWeb%2fSaoFrancisco"
-              className="flex items-center gap-2 text-sm font-semibold uppercase tracking-normal text-slate-700 transition-colors hover:text-blue-600"
-              target="_blank"
-              rel="noreferrer"
+          <div
+            className="relative"
+            ref={dropdownRef}
+            onMouseEnter={() => setIsCollegeOpen(true)}
+            onMouseLeave={() => setIsCollegeOpen(false)}
+          >
+            <button
+              type="button"
+              className="font-semibold text-slate-700 transition hover:text-[#1582b5]"
+              onClick={() => setIsCollegeOpen((current) => !current)}
             >
-              <UserIcon />
-              Aluno
-            </a>
-            <a
-              href="https://www.outlook.com/csfba.com.br"
-              className="flex items-center gap-2 text-sm font-semibold uppercase tracking-normal text-slate-700 transition-colors hover:text-blue-600"
-              target="_blank"
-              rel="noreferrer"
+              O Colégio
+            </button>
+            <div
+              className={`absolute right-0 top-full mt-4 w-64 rounded-lg bg-[#1e2d3d] p-4 shadow-2xl transition ${
+                isCollegeOpen
+                  ? "translate-y-0 opacity-100"
+                  : "pointer-events-none -translate-y-1 opacity-0"
+              }`}
             >
-              <CapIcon />
-              Professor
-            </a>
+              {collegeItems.map((item) => (
+                <Link
+                  key={item.href}
+                  className="block rounded-md px-3 py-3 font-semibold text-white transition hover:bg-white/10"
+                  href={item.href}
+                  onClick={() => setIsCollegeOpen(false)}
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </div>
           </div>
+          <Link className="font-semibold text-slate-700" href="/historia">
+            Nossa História
+          </Link>
+          <Link className="font-semibold text-slate-700" href="/a-congregacao">
+            A Congregação
+          </Link>
+          <Link className="font-semibold text-slate-700" href="/#contato">
+            Contato
+          </Link>
+        </nav>
 
+        <div className="flex items-center gap-3">
+          <Link
+            href="/aplicativos"
+            className="hidden h-12 items-center justify-center rounded-lg bg-[#54d500] px-5 text-sm font-black uppercase text-white transition hover:bg-[#45bd00] sm:inline-flex"
+          >
+            Aplicativos
+          </Link>
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 text-slate-700 md:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 text-slate-700 lg:hidden"
             aria-label="Abrir menu"
-            aria-expanded={isMobileOpen}
-            onClick={() => setIsMobileOpen(true)}
+            onClick={() => setOpenPanel("menu")}
           >
             <MenuIcon />
           </button>
         </div>
       </div>
 
-      <div className="hidden md:block">
-        <div className="container-csf flex h-14 items-center justify-between gap-6">
-          <nav className="flex items-center gap-8" aria-label="Menu principal">
-            <Link
-              href="/"
-              className="text-blue-600 font-medium transition-colors"
-            >
-              Home
-            </Link>
-
-            <div
-              ref={dropdownRef}
-              className="relative"
-              onMouseEnter={() => setIsCollegeOpen(true)}
-              onMouseLeave={() => setIsCollegeOpen(false)}
-            >
-              <button
-                type="button"
-                className="flex items-center gap-1 text-slate-700 transition-colors hover:text-blue-600"
-                aria-haspopup="menu"
-                aria-expanded={isCollegeOpen}
-                onClick={() => setIsCollegeOpen((isOpen) => !isOpen)}
-              >
-                O Colégio
-                <ChevronIcon isOpen={isCollegeOpen} />
-              </button>
-
-              <div
-                className={`absolute left-0 top-full z-50 mt-2 w-72 rounded-2xl bg-[#1e2d3d] p-6 shadow-2xl transition-all duration-200 ${
-                  isCollegeOpen
-                    ? "translate-y-0 opacity-100"
-                    : "-translate-y-1 pointer-events-none opacity-0"
-                }`}
-                role="menu"
-              >
-                {collegeItems.map((item, index) => (
-                  <Link
-                    key={item.title}
-                    href={item.href}
-                    className={`block rounded-lg px-3 py-2 transition-colors hover:bg-slate-700/30 ${
-                      index < collegeItems.length - 1
-                        ? "border-b border-slate-700/50"
-                        : ""
-                    }`}
-                    role="menuitem"
-                    onClick={() => setIsCollegeOpen(false)}
-                  >
-                    <span className="block font-semibold text-white">
-                      {item.title}
-                    </span>
-                    <span className="mt-1 block text-sm text-slate-400">
-                      {item.description}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <Link
-              href="/historia"
-              className="text-slate-700 transition-colors hover:text-blue-600"
-            >
-              Nossa História
-            </Link>
-            <Link
-              href="/o-colegio"
-              className="text-slate-700 transition-colors hover:text-blue-600"
-            >
-              A Congregação
-            </Link>
-            <Link
-              href="/contato"
-              className="text-slate-700 transition-colors hover:text-blue-600"
-            >
-              Contato
-            </Link>
-          </nav>
-
-          <a
-            href="https://csfba.com.br/app/aplicativos/"
-            className="inline-flex h-11 items-center justify-center rounded-lg bg-[#22c55e] px-5 text-sm font-semibold uppercase tracking-normal text-white shadow-sm transition-colors hover:bg-green-500"
-          >
-            Aplicativos
-          </a>
-        </div>
-      </div>
-
-      <div
-        className={`fixed inset-0 z-50 bg-slate-950/40 transition-opacity duration-200 md:hidden ${
-          isMobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
-        }`}
-        onClick={() => setIsMobileOpen(false)}
-      >
-        <aside
-          className={`ml-auto h-full w-[min(86vw,360px)] bg-white shadow-2xl transition-transform duration-200 ${
-            isMobileOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-          aria-label="Menu mobile"
-          onClick={(event) => event.stopPropagation()}
+      <div className="grid grid-cols-2 border-t border-slate-100 md:hidden">
+        <button
+          type="button"
+          className="flex h-16 items-center justify-center gap-2 font-bold uppercase text-slate-700"
+          onClick={() => setOpenPanel("aluno")}
         >
-          <div className="flex h-16 items-center justify-between border-b border-slate-100 px-5">
-            <span className="font-bold text-[#0f2f5f]">CSF</span>
-            <button
-              type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 text-slate-700"
-              aria-label="Fechar menu"
-              onClick={() => setIsMobileOpen(false)}
-            >
-              <CloseIcon />
-            </button>
-          </div>
-
-          <nav className="space-y-1 px-5 py-5" aria-label="Menu principal">
-            <MobileLink href="/" onClick={() => setIsMobileOpen(false)}>
-              Home
-            </MobileLink>
-            {collegeItems.map((item) => (
-              <MobileLink
-                key={item.title}
-                href={item.href}
-                onClick={() => setIsMobileOpen(false)}
-              >
-                {item.title}
-              </MobileLink>
-            ))}
-            <a
-              href="https://csfba.com.br/app/aplicativos/"
-              className="mt-4 inline-flex w-full items-center justify-center rounded-lg bg-[#22c55e] px-4 py-3 text-sm font-semibold uppercase tracking-normal text-white"
-            >
-              Aplicativos
-            </a>
-          </nav>
-
-          <div className="border-t border-slate-100 px-5 py-5">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-normal text-slate-500">
-              Acesso rápido
-            </p>
-            <div className="grid gap-2">
-              <a
-                href="https://web.prodados.net.br/ProWeb/SaoFrancisco/Login.aspx?ReturnUrl=%2fProWeb%2fSaoFrancisco"
-                className="flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <UserIcon />
-                Aluno
-              </a>
-              <a
-                href="https://www.outlook.com/csfba.com.br"
-                className="flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <CapIcon />
-                Professor
-              </a>
-              {studentLinks.map((item) => (
-                <span
-                  key={item}
-                  className="rounded-lg px-3 py-1 text-sm text-slate-500"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-        </aside>
+          <img src="/csf/icons/icon_aluno.svg" alt="" className="h-6 w-6" />
+          Aluno
+        </button>
+        <button
+          type="button"
+          className="flex h-16 items-center justify-center gap-2 font-bold uppercase text-slate-700"
+          onClick={() => setOpenPanel("professor")}
+        >
+          <img src="/csf/icons/icon_professor.svg" alt="" className="h-6 w-6" />
+          Professor
+        </button>
       </div>
+
+      <OverlayPanel openPanel={openPanel} setOpenPanel={setOpenPanel} />
     </header>
   );
 }
 
-function MobileLink({
+function AccessButton({
+  icon,
+  label,
+  onClick,
+}: {
+  icon: string;
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      className="flex items-center gap-2 text-sm font-bold uppercase text-slate-700 transition hover:text-[#1582b5]"
+      onClick={onClick}
+    >
+      <img src={icon} alt="" className="h-6 w-6" />
+      {label}
+    </button>
+  );
+}
+
+function OverlayPanel({
+  openPanel,
+  setOpenPanel,
+}: {
+  openPanel: "menu" | "aluno" | "professor" | null;
+  setOpenPanel: (panel: "menu" | "aluno" | "professor" | null) => void;
+}) {
+  const isOpen = openPanel !== null;
+  const title =
+    openPanel === "aluno"
+      ? "Área do Aluno"
+      : openPanel === "professor"
+        ? "Área do Professor"
+        : "Menu";
+
+  return (
+    <div
+      className={`fixed inset-0 z-50 bg-[#0f2f5f]/95 text-white transition ${
+        isOpen ? "opacity-100" : "pointer-events-none opacity-0"
+      }`}
+    >
+      <button
+        type="button"
+        className="absolute right-6 top-6 text-5xl font-light"
+        aria-label="Fechar menu"
+        onClick={() => setOpenPanel(null)}
+      >
+        ×
+      </button>
+      <div className="container-csf flex min-h-screen items-center justify-center py-24">
+        <div className="w-full max-w-3xl text-center">
+          <p className="mb-8 text-sm font-bold uppercase tracking-[0.25em] text-[#5bc4ff]">
+            {title}
+          </p>
+          <div className="grid gap-4 text-2xl font-semibold md:text-3xl">
+            {openPanel === "menu" &&
+              collegeItems.map((item) => (
+                <OverlayLink
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpenPanel(null)}
+                >
+                  {item.title}
+                </OverlayLink>
+              ))}
+            {openPanel === "aluno" && (
+              <>
+                {studentAreas.map((item) => (
+                  <OverlayLink
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpenPanel(null)}
+                  >
+                    {item.title}
+                  </OverlayLink>
+                ))}
+                {studentExtraLinks.map((item) => (
+                  <OverlayLink
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpenPanel(null)}
+                  >
+                    {item.title}
+                  </OverlayLink>
+                ))}
+              </>
+            )}
+            {openPanel === "professor" && (
+              <>
+                <OverlayLink href={quickLinks.boletim} onClick={() => setOpenPanel(null)}>
+                  Boletim e Agenda
+                </OverlayLink>
+                <OverlayLink href={quickLinks.outlook} onClick={() => setOpenPanel(null)}>
+                  Email
+                </OverlayLink>
+                <OverlayLink href={quickLinks.coc} onClick={() => setOpenPanel(null)}>
+                  Portal COC
+                </OverlayLink>
+                <OverlayLink href={quickLinks.pleno} onClick={() => setOpenPanel(null)}>
+                  Programa PLENO
+                </OverlayLink>
+                <OverlayLink href={quickLinks.hino} onClick={() => setOpenPanel(null)}>
+                  HINO - CSF
+                </OverlayLink>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function OverlayLink({
   href,
   children,
   onClick,
@@ -293,69 +281,20 @@ function MobileLink({
   children: React.ReactNode;
   onClick: () => void;
 }) {
+  const isExternal = href.startsWith("http");
+
+  if (isExternal) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer" onClick={onClick}>
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <Link
-      href={href}
-      className="block rounded-lg px-3 py-3 font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-blue-600"
-      onClick={onClick}
-    >
+    <Link href={href} onClick={onClick}>
       {children}
     </Link>
-  );
-}
-
-function ChevronIcon({ isOpen }: { isOpen: boolean }) {
-  return (
-    <svg
-      className={`h-4 w-4 transition-transform duration-200 ${
-        isOpen ? "rotate-180" : ""
-      }`}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  );
-}
-
-function UserIcon() {
-  return (
-    <svg
-      className="h-5 w-5"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M20 21a8 8 0 0 0-16 0" />
-      <circle cx="12" cy="7" r="4" />
-    </svg>
-  );
-}
-
-function CapIcon() {
-  return (
-    <svg
-      className="h-5 w-5"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="m22 10-10-5-10 5 10 5 10-5Z" />
-      <path d="M6 12v5c3 3 9 3 12 0v-5" />
-    </svg>
   );
 }
 
@@ -373,23 +312,6 @@ function MenuIcon() {
       <path d="M4 7h16" />
       <path d="M4 12h16" />
       <path d="M4 17h16" />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg
-      className="h-5 w-5"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      aria-hidden="true"
-    >
-      <path d="M18 6 6 18" />
-      <path d="m6 6 12 12" />
     </svg>
   );
 }
