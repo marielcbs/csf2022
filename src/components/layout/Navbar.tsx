@@ -4,23 +4,35 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { quickLinks, studentAreas } from "@/data/site";
 
-const collegeItems = [
+const menuItems = [
+  { title: "Home", href: "/" },
   { title: "O Colégio", href: "/o-colegio" },
   { title: "Nossa História", href: "/historia" },
   { title: "A Congregação", href: "/a-congregacao" },
-  { title: "Segmentos", href: "/#segmentos" },
-  { title: "Fale conosco", href: "/#contato" },
+  { title: "Contato", href: "/#contato" },
 ];
 
-const studentExtraLinks = [
+const studentLinks = [
+  { title: "Ed. Infantil / EF - 1º ao 5º ANO", href: studentAreas[0].href },
+  { title: "Ens. Fund - 6º ao 9º ANO", href: studentAreas[1].href },
+  { title: "Ens. Médio - 1ª e 2º série", href: studentAreas[2].href },
+  { title: "Ens. Médio - 3º série", href: studentAreas[3].href },
   { title: "Boletim e Agenda", href: quickLinks.boletim },
   { title: "Portal COC", href: quickLinks.coc },
   { title: "Programa PLENO", href: quickLinks.pleno },
   { title: "HINO - CSF", href: quickLinks.hino },
 ];
 
+const teacherLinks = [
+  { title: "Boletim e Agenda", href: quickLinks.boletim },
+  { title: "Email", href: quickLinks.outlook },
+  { title: "Portal COC", href: quickLinks.coc },
+];
+
 export default function Navbar() {
-  const [isCollegeOpen, setIsCollegeOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<"aluno" | "professor" | null>(
+    null,
+  );
   const [openPanel, setOpenPanel] = useState<
     "menu" | "aluno" | "professor" | null
   >(null);
@@ -32,7 +44,7 @@ export default function Navbar() {
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {
-        setIsCollegeOpen(false);
+        setOpenDropdown(null);
       }
     }
 
@@ -60,65 +72,44 @@ export default function Navbar() {
           className="hidden items-center gap-1 rounded-lg border border-slate-200 bg-white p-1 shadow-sm lg:flex"
           aria-label="Principal"
         >
-          <NavLink href="/">Home</NavLink>
-          <div
-            className="relative"
-            ref={dropdownRef}
-            onMouseEnter={() => setIsCollegeOpen(true)}
-            onMouseLeave={() => setIsCollegeOpen(false)}
-          >
-            <button
-              type="button"
-              className="h-10 rounded-lg px-4 text-sm font-bold text-slate-700 transition hover:bg-slate-100 hover:text-[#0d8cc4]"
-              onClick={() => setIsCollegeOpen((current) => !current)}
-            >
-              O Colégio
-            </button>
-            <div
-              className={`absolute left-0 top-full mt-3 w-64 rounded-lg border border-slate-200 bg-white p-2 shadow-2xl transition ${
-                isCollegeOpen
-                  ? "translate-y-0 opacity-100"
-                  : "pointer-events-none -translate-y-1 opacity-0"
-              }`}
-            >
-              {collegeItems.map((item) => (
-                <Link
-                  key={item.href}
-                  className="block rounded-lg px-4 py-3 text-sm font-bold text-slate-700 transition hover:bg-[#eef7fc] hover:text-[#0d8cc4]"
-                  href={item.href}
-                  onClick={() => setIsCollegeOpen(false)}
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-          <NavLink href="/historia">História</NavLink>
-          <NavLink href="/a-congregacao">Congregação</NavLink>
-          <NavLink href="/#contato">Contato</NavLink>
+          {menuItems.map((item) => (
+            <NavLink key={item.href} href={item.href}>
+              {item.title}
+            </NavLink>
+          ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            className="hidden h-11 items-center gap-2 rounded-lg px-3 text-sm font-extrabold text-slate-700 transition hover:bg-slate-100 hover:text-[#0d8cc4] md:inline-flex"
-            onClick={() => setOpenPanel("aluno")}
-          >
-            <img src="/csf/icons/icon_aluno.svg" alt="" className="h-5 w-5" />
-            Aluno
-          </button>
-          <button
-            type="button"
-            className="hidden h-11 items-center gap-2 rounded-lg px-3 text-sm font-extrabold text-slate-700 transition hover:bg-slate-100 hover:text-[#0d8cc4] md:inline-flex"
-            onClick={() => setOpenPanel("professor")}
-          >
-            <img
-              src="/csf/icons/icon_professor.svg"
-              alt=""
-              className="h-5 w-5"
+        <div ref={dropdownRef} className="flex items-center gap-2">
+          <div className="hidden items-center md:flex">
+            <AccountDropdown
+              title="Aluno"
+              icon="/csf/icons/icon_aluno.svg"
+              links={studentLinks}
+              isOpen={openDropdown === "aluno"}
+              onOpen={() => setOpenDropdown("aluno")}
+              onToggle={() =>
+                setOpenDropdown((current) =>
+                  current === "aluno" ? null : "aluno",
+                )
+              }
+              onClose={() => setOpenDropdown(null)}
+              widthClassName="w-[218px]"
             />
-            Professor
-          </button>
+            <AccountDropdown
+              title="Professor"
+              icon="/csf/icons/icon_professor.svg"
+              links={teacherLinks}
+              isOpen={openDropdown === "professor"}
+              onOpen={() => setOpenDropdown("professor")}
+              onToggle={() =>
+                setOpenDropdown((current) =>
+                  current === "professor" ? null : "professor",
+                )
+              }
+              onClose={() => setOpenDropdown(null)}
+              widthClassName="w-36"
+            />
+          </div>
           <Link
             href="/aplicativos"
             className="loom-button hidden bg-[#42c400] text-white hover:bg-[#37ad00] sm:inline-flex"
@@ -217,7 +208,7 @@ function OverlayPanel({
           </p>
           <div className="grid gap-4 text-2xl font-semibold md:text-3xl">
             {openPanel === "menu" &&
-              collegeItems.map((item) => (
+              menuItems.map((item) => (
                 <OverlayLink
                   key={item.href}
                   href={item.href}
@@ -228,16 +219,7 @@ function OverlayPanel({
               ))}
             {openPanel === "aluno" && (
               <>
-                {studentAreas.map((item) => (
-                  <OverlayLink
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setOpenPanel(null)}
-                  >
-                    {item.title}
-                  </OverlayLink>
-                ))}
-                {studentExtraLinks.map((item) => (
+                {studentLinks.map((item) => (
                   <OverlayLink
                     key={item.href}
                     href={item.href}
@@ -250,42 +232,104 @@ function OverlayPanel({
             )}
             {openPanel === "professor" && (
               <>
-                <OverlayLink
-                  href={quickLinks.boletim}
-                  onClick={() => setOpenPanel(null)}
-                >
-                  Boletim e Agenda
-                </OverlayLink>
-                <OverlayLink
-                  href={quickLinks.outlook}
-                  onClick={() => setOpenPanel(null)}
-                >
-                  Email
-                </OverlayLink>
-                <OverlayLink
-                  href={quickLinks.coc}
-                  onClick={() => setOpenPanel(null)}
-                >
-                  Portal COC
-                </OverlayLink>
-                <OverlayLink
-                  href={quickLinks.pleno}
-                  onClick={() => setOpenPanel(null)}
-                >
-                  Programa PLENO
-                </OverlayLink>
-                <OverlayLink
-                  href={quickLinks.hino}
-                  onClick={() => setOpenPanel(null)}
-                >
-                  HINO - CSF
-                </OverlayLink>
+                {teacherLinks.map((item) => (
+                  <OverlayLink
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpenPanel(null)}
+                  >
+                    {item.title}
+                  </OverlayLink>
+                ))}
               </>
             )}
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+function AccountDropdown({
+  title,
+  icon,
+  links,
+  isOpen,
+  onOpen,
+  onToggle,
+  onClose,
+  widthClassName,
+}: {
+  title: string;
+  icon: string;
+  links: { title: string; href: string }[];
+  isOpen: boolean;
+  onOpen: () => void;
+  onToggle: () => void;
+  onClose: () => void;
+  widthClassName: string;
+}) {
+  return (
+    <div
+      className="relative"
+      onMouseEnter={onOpen}
+      onMouseLeave={onClose}
+    >
+      <button
+        type="button"
+        className="inline-flex h-11 items-center gap-2 bg-[#079ee3] px-4 text-sm font-semibold uppercase text-white transition hover:bg-[#0588c5]"
+        onClick={onToggle}
+      >
+        <img className="h-5 w-5 brightness-0 invert" src={icon} alt="" />
+        {title}
+      </button>
+      <div
+        className={`absolute left-0 top-full z-50 ${widthClassName} bg-[#f2f2f2] py-3 shadow-xl transition ${
+          isOpen
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-1 opacity-0"
+        }`}
+      >
+        {links.map((item) => (
+          <DropdownLink key={item.href} href={item.href} onClick={onClose}>
+            {item.title}
+          </DropdownLink>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DropdownLink({
+  href,
+  children,
+  onClick,
+}: {
+  href: string;
+  children: React.ReactNode;
+  onClick: () => void;
+}) {
+  const className =
+    "block px-5 py-3 text-sm font-medium text-[#2475df] transition hover:bg-white hover:text-[#0d8cc4]";
+
+  if (href.startsWith("http")) {
+    return (
+      <a
+        className={className}
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        onClick={onClick}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link className={className} href={href} onClick={onClick}>
+      {children}
+    </Link>
   );
 }
 
