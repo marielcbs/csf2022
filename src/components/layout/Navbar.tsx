@@ -53,34 +53,42 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/92 backdrop-blur">
-      <div className="container-csf flex h-20 items-center justify-between gap-6">
-        <Link href="/" className="flex shrink-0 items-center" aria-label="CSF">
+    <header className="sticky top-0 z-50 bg-white shadow-sm">
+      <div className="h-10 bg-gradient-to-b from-[#0a467b] to-[#1280e1]" />
+
+      <div className="container-csf flex min-h-24 items-center justify-between gap-6 py-4">
+        <Link
+          href="/"
+          className="flex min-w-0 shrink-0 items-center"
+          aria-label="CSF"
+        >
           <img
             src="/csf/logos/LOGOCSF.svg"
             alt="Colégio São Francisco"
-            className="hidden h-12 w-auto sm:block"
+            className="hidden h-16 w-auto sm:block"
           />
           <img
             src="/csf/logos/LOGOCSFm.svg"
             alt="Colégio São Francisco"
-            className="h-12 w-auto sm:hidden"
+            className="h-14 w-auto sm:hidden"
           />
         </Link>
 
-        <nav
-          className="hidden items-center gap-1 rounded-lg border border-slate-200 bg-white p-1 shadow-sm lg:flex"
-          aria-label="Principal"
+        <div
+          ref={dropdownRef}
+          className="hidden min-w-0 items-center justify-end lg:flex"
         >
-          {menuItems.map((item) => (
-            <NavLink key={item.href} href={item.href}>
-              {item.title}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div ref={dropdownRef} className="flex items-center gap-2">
-          <div className="hidden items-center md:flex">
+          <nav
+            className="flex min-h-16 min-w-0 items-center overflow-visible rounded-full bg-gradient-to-b from-white to-[#efefef] pl-5 shadow-[0_16px_40px_rgba(16,42,76,0.18)] ring-1 ring-slate-200/70"
+            aria-label="Principal"
+          >
+            <div className="flex min-w-0 items-center">
+              {menuItems.map((item) => (
+                <NavLink key={item.href} href={item.href}>
+                  {item.title}
+                </NavLink>
+              ))}
+            </div>
             <AccountDropdown
               title="Aluno"
               icon="/csf/icons/icon_aluno.svg"
@@ -109,16 +117,13 @@ export default function Navbar() {
               onClose={() => setOpenDropdown(null)}
               widthClassName="w-36"
             />
-          </div>
-          <Link
-            href="/aplicativos"
-            className="loom-button hidden bg-[#42c400] text-white hover:bg-[#37ad00] sm:inline-flex"
-          >
-            Aplicativos
-          </Link>
+          </nav>
+        </div>
+
+        <div className="flex items-center gap-2 lg:hidden">
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 text-slate-700 lg:hidden"
+            className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-[#079ee3] text-white shadow-sm"
             aria-label="Abrir menu"
             onClick={() => setOpenPanel("menu")}
           >
@@ -127,24 +132,28 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 border-t border-slate-100 md:hidden">
+      <div className="grid grid-cols-2 border-t border-[#079ee3]/20 bg-[#079ee3] md:hidden">
         <button
           type="button"
-          className="flex h-14 items-center justify-center gap-2 text-sm font-bold uppercase text-slate-700"
+          className="flex h-14 items-center justify-center gap-2 text-sm font-bold uppercase text-white"
           onClick={() => setOpenPanel("aluno")}
         >
-          <img src="/csf/icons/icon_aluno.svg" alt="" className="h-5 w-5" />
+          <img
+            src="/csf/icons/icon_aluno.svg"
+            alt=""
+            className="h-5 w-5 brightness-0 invert"
+          />
           Aluno
         </button>
         <button
           type="button"
-          className="flex h-14 items-center justify-center gap-2 text-sm font-bold uppercase text-slate-700"
+          className="flex h-14 items-center justify-center gap-2 border-l border-white/20 text-sm font-bold uppercase text-white"
           onClick={() => setOpenPanel("professor")}
         >
           <img
             src="/csf/icons/icon_professor.svg"
             alt=""
-            className="h-5 w-5"
+            className="h-5 w-5 brightness-0 invert"
           />
           Professor
         </button>
@@ -164,7 +173,7 @@ function NavLink({
 }) {
   return (
     <Link
-      className="flex h-10 items-center rounded-lg px-4 text-sm font-bold text-slate-700 transition hover:bg-slate-100 hover:text-[#0d8cc4]"
+      className="flex h-12 items-center whitespace-nowrap px-4 text-sm font-semibold uppercase text-[#0a467b] transition hover:text-[#1280e1]"
       href={href}
     >
       {children}
@@ -270,21 +279,17 @@ function AccountDropdown({
   widthClassName: string;
 }) {
   return (
-    <div
-      className="relative"
-      onMouseEnter={onOpen}
-      onMouseLeave={onClose}
-    >
+    <div className="relative self-stretch" onMouseEnter={onOpen} onMouseLeave={onClose}>
       <button
         type="button"
-        className="inline-flex h-11 items-center gap-2 bg-[#079ee3] px-4 text-sm font-semibold uppercase text-white transition hover:bg-[#0588c5]"
+        className="inline-flex h-full min-h-16 items-center gap-2 bg-[#079ee3] px-5 text-base font-medium uppercase text-white transition hover:bg-[#0588c5]"
         onClick={onToggle}
       >
         <img className="h-5 w-5 brightness-0 invert" src={icon} alt="" />
         {title}
       </button>
       <div
-        className={`absolute left-0 top-full z-50 ${widthClassName} bg-[#f2f2f2] py-3 shadow-xl transition ${
+        className={`absolute left-0 top-full z-50 ${widthClassName} bg-[#f2f2f2] py-2 shadow-xl transition ${
           isOpen
             ? "translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-1 opacity-0"
@@ -310,7 +315,7 @@ function DropdownLink({
   onClick: () => void;
 }) {
   const className =
-    "block px-5 py-3 text-sm font-medium text-[#2475df] transition hover:bg-white hover:text-[#0d8cc4]";
+    "block px-5 py-4 text-sm font-medium text-[#2475df] transition hover:bg-white hover:text-[#0d8cc4]";
 
   if (href.startsWith("http")) {
     return (
