@@ -53,10 +53,8 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
-      <div className="h-10 bg-gradient-to-b from-[#0a467b] to-[#1280e1]" />
-
-      <div className="container-csf flex min-h-24 items-center justify-between gap-6 py-4">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
+      <div className="container-csf flex h-20 items-center justify-between gap-6">
         <Link
           href="/"
           className="flex min-w-0 shrink-0 items-center"
@@ -65,12 +63,12 @@ export default function Navbar() {
           <img
             src="/csf/logos/LOGOCSF.svg"
             alt="Colégio São Francisco"
-            className="hidden h-16 w-auto sm:block"
+            className="hidden h-14 w-auto sm:block"
           />
           <img
             src="/csf/logos/LOGOCSFm.svg"
             alt="Colégio São Francisco"
-            className="h-14 w-auto sm:hidden"
+            className="h-12 w-auto sm:hidden"
           />
         </Link>
 
@@ -79,7 +77,7 @@ export default function Navbar() {
           className="hidden min-w-0 items-center justify-end lg:flex"
         >
           <nav
-            className="flex min-h-16 min-w-0 items-center overflow-visible rounded-full bg-gradient-to-b from-white to-[#efefef] pl-5 shadow-[0_16px_40px_rgba(16,42,76,0.18)] ring-1 ring-slate-200/70"
+            className="flex min-h-12 min-w-0 items-center overflow-visible rounded-lg bg-white px-3 shadow-md ring-1 ring-slate-200"
             aria-label="Principal"
           >
             <div className="flex min-w-0 items-center">
@@ -89,6 +87,9 @@ export default function Navbar() {
                 </NavLink>
               ))}
             </div>
+          </nav>
+
+          <div className="ml-16 flex items-center">
             <AccountDropdown
               title="Aluno"
               icon="/csf/icons/icon_aluno.svg"
@@ -117,7 +118,14 @@ export default function Navbar() {
               onClose={() => setOpenDropdown(null)}
               widthClassName="w-36"
             />
-          </nav>
+          </div>
+
+          <Link
+            href="/aplicativos"
+            className="ml-2 inline-flex h-12 items-center justify-center rounded-md bg-[#42c400] px-6 text-base font-extrabold text-white transition hover:bg-[#37ad00]"
+          >
+            Aplicativos
+          </Link>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
@@ -173,7 +181,7 @@ function NavLink({
 }) {
   return (
     <Link
-      className="flex h-12 items-center whitespace-nowrap px-4 text-sm font-semibold uppercase text-[#0a467b] transition hover:text-[#1280e1]"
+      className="flex h-12 items-center whitespace-nowrap px-4 text-sm font-bold text-[#25364d] transition hover:text-[#1280e1]"
       href={href}
     >
       {children}
@@ -279,10 +287,10 @@ function AccountDropdown({
   widthClassName: string;
 }) {
   return (
-    <div className="relative self-stretch" onMouseEnter={onOpen} onMouseLeave={onClose}>
+    <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
       <button
         type="button"
-        className="inline-flex h-full min-h-16 items-center gap-2 bg-[#079ee3] px-5 text-base font-medium uppercase text-white transition hover:bg-[#0588c5]"
+        className="inline-flex h-12 items-center gap-2 bg-[#079ee3] px-5 text-base font-bold uppercase text-white transition hover:bg-[#0588c5]"
         onClick={onToggle}
       >
         <img className="h-5 w-5 brightness-0 invert" src={icon} alt="" />
