@@ -77,7 +77,7 @@ export default function Navbar() {
           className="hidden min-w-0 items-center justify-end lg:flex"
         >
           <nav
-            className="flex min-h-12 min-w-0 items-center overflow-visible rounded-lg bg-white px-3 shadow-md ring-1 ring-slate-200"
+            className="flex min-h-12 min-w-0 items-center overflow-visible rounded-lg bg-white px-3"
             aria-label="Principal"
           >
             <div className="flex min-w-0 items-center">
