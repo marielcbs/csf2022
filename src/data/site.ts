@@ -5,7 +5,7 @@ export const quickLinks = {
   pleno: "https://portal.programapleno.com.br/login",
   outlook: "https://www.outlook.com/csfba.com.br",
   hino:
-    "https://csfba.com.br/site/modulos/baixar.php?arquivo=../arquivos/HINOCSF.pdf",
+    "https://www.csfba.com.br/site/modulos/baixar.php?arquivo=../arquivos/HINOCSF.pdf",
   whatsapp: "https://wa.me/557530312495",
   instagram: "https://www.instagram.com/csfba",
 };
