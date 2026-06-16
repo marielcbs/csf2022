@@ -1,4 +1,6 @@
-import PdfTabs from "@/components/ui/PdfTabs";
+import StudentDownloadsPanel from "@/components/students/StudentDownloadsPanel";
+import type { StudentSegmentQuery } from "@/lib/student-download-defs";
+import { getStudentDownloads } from "@/lib/student-downloads";
 
 type Props = {
   params: Promise<{
@@ -8,11 +10,14 @@ type Props = {
 
 export default async function SegmentoPage({ params }: Props) {
   const { slug } = await params;
+  const downloads = await getStudentDownloads(slug as StudentSegmentQuery);
 
   const nomes: Record<string, string> = {
     infantil: "Educacao Infantil e Fundamental I",
     "ef6-9": "Fundamental II",
     medio: "Ensino Medio",
+    medio12: "Ensino Medio - 1a e 2a serie",
+    medio3: "Ensino Medio - 3a serie",
   };
 
   return (
@@ -21,7 +26,7 @@ export default async function SegmentoPage({ params }: Props) {
         {nomes[slug] ?? "Segmento"}
       </h1>
 
-      <PdfTabs segmento={slug} />
+      <StudentDownloadsPanel downloads={downloads} />
     </main>
   );
 }

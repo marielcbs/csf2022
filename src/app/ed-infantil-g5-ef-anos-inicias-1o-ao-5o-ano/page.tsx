@@ -1,12 +1,15 @@
 import StudentAreaPage from "@/components/students/StudentAreaPage";
-import { studentAreas, studentDocuments } from "@/data/site";
+import { studentAreas } from "@/data/site";
+import { getStudentDownloads } from "@/lib/student-downloads";
 
-export default function InfantilFundamentalPage() {
+export default async function InfantilFundamentalPage() {
+  const downloads = await getStudentDownloads("infantil");
+
   return (
     <StudentAreaPage
-      title="Ed. Infantil - G5 / Ens. Fundamental - 1º ao 5º ano"
+      title="Ed. Infantil - G5 / Ens. Fundamental - 1o ao 5o ano"
       description={studentAreas[0].description}
-      documents={studentDocuments.infantil}
+      downloads={downloads}
     />
   );
 }

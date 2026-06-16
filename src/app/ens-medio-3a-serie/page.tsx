@@ -1,12 +1,15 @@
 import StudentAreaPage from "@/components/students/StudentAreaPage";
-import { studentAreas, studentDocuments } from "@/data/site";
+import { studentAreas } from "@/data/site";
+import { getStudentDownloads } from "@/lib/student-downloads";
 
-export default function MedioTerceiraPage() {
+export default async function MedioTerceiraPage() {
+  const downloads = await getStudentDownloads("medio3");
+
   return (
     <StudentAreaPage
-      title="Ens. Médio - 3ª série"
+      title="Ens. Medio - 3a serie"
       description={studentAreas[3].description}
-      documents={studentDocuments.medio3}
+      downloads={downloads}
     />
   );
 }

@@ -1,4 +1,4 @@
-import PdfUpload from "@/components/forms/PdfUpload";
+import StudentDownloadsAdmin from "@/components/forms/StudentDownloadsAdmin";
 import { requireAdminUser } from "@/lib/auth/admin";
 
 export default async function ArquivosPage() {
@@ -6,7 +6,7 @@ export default async function ArquivosPage() {
 
   return (
     <main className="container-csf py-20">
-      <PdfUpload />
+      <StudentDownloadsAdmin />
     </main>
   );
 }

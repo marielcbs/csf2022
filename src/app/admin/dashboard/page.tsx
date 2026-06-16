@@ -20,7 +20,7 @@ export default async function AdminDashboardPage() {
             href="/admin/arquivos"
             className="inline-flex rounded bg-[#0f2f5f] px-5 py-3 font-semibold text-white"
           >
-            Gerenciar arquivos
+            Gerenciar downloads
           </Link>
 
           <SignOutButton />
