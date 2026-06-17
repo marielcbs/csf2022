@@ -23,22 +23,49 @@ export type StudentDownload = {
   arquivo_url: string;
 };
 
-function getGoogleDriveFileId(value: string) {
+type GoogleDocumentUrl = {
+  fileId: string;
+  app: "drive" | "document" | "spreadsheets" | "presentation";
+};
+
+function getGoogleDocumentUrl(value: string): GoogleDocumentUrl | null {
   try {
     const url = new URL(value);
 
-    if (!url.hostname.includes("drive.google.com")) {
+    if (
+      !url.hostname.includes("drive.google.com") &&
+      !url.hostname.includes("docs.google.com")
+    ) {
       return null;
     }
 
     const pathnameMatch = url.pathname.match(/\/file\/d\/([^/]+)/);
 
     if (pathnameMatch?.[1]) {
-      return pathnameMatch[1];
+      return {
+        fileId: pathnameMatch[1],
+        app: "drive",
+      };
+    }
+
+    const docsMatch = url.pathname.match(
+      /^\/(document|spreadsheets|presentation)\/d\/([^/]+)/,
+    );
+
+    if (docsMatch?.[1] && docsMatch[2]) {
+      return {
+        fileId: docsMatch[2],
+        app: docsMatch[1] as GoogleDocumentUrl["app"],
+      };
     }
 
     const id = url.searchParams.get("id");
-    return id || null;
+    return id
+      ? {
+          fileId: id,
+          app: "drive",
+        }
+      : null;
   } catch {
     return null;
   }
@@ -46,27 +73,57 @@ function getGoogleDriveFileId(value: string) {
 
 export function normalizeDocumentUrlForSave(value: string) {
   const trimmedValue = value.trim();
-  const googleDriveFileId = getGoogleDriveFileId(trimmedValue);
+  const googleDocument = getGoogleDocumentUrl(trimmedValue);
 
-  if (!googleDriveFileId) {
+  if (!googleDocument) {
     return trimmedValue;
   }
 
-  return `https://drive.google.com/uc?export=download&id=${googleDriveFileId}`;
+  return getDocumentDownloadUrl(trimmedValue);
 }
 
 export function getDocumentDownloadUrl(value: string) {
-  return normalizeDocumentUrlForSave(value);
-}
+  const googleDocument = getGoogleDocumentUrl(value);
 
-export function getDocumentViewUrl(value: string) {
-  const googleDriveFileId = getGoogleDriveFileId(value);
-
-  if (!googleDriveFileId) {
+  if (!googleDocument) {
     return value;
   }
 
-  return `https://drive.google.com/file/d/${googleDriveFileId}/view`;
+  if (googleDocument.app === "document") {
+    return `https://docs.google.com/document/d/${googleDocument.fileId}/export?format=pdf`;
+  }
+
+  if (googleDocument.app === "spreadsheets") {
+    return `https://docs.google.com/spreadsheets/d/${googleDocument.fileId}/export?format=pdf`;
+  }
+
+  if (googleDocument.app === "presentation") {
+    return `https://docs.google.com/presentation/d/${googleDocument.fileId}/export/pdf`;
+  }
+
+  return `https://drive.google.com/uc?export=download&id=${googleDocument.fileId}`;
+}
+
+export function getDocumentViewUrl(value: string) {
+  const googleDocument = getGoogleDocumentUrl(value);
+
+  if (!googleDocument) {
+    return value;
+  }
+
+  if (googleDocument.app === "document") {
+    return `https://docs.google.com/document/d/${googleDocument.fileId}/view`;
+  }
+
+  if (googleDocument.app === "spreadsheets") {
+    return `https://docs.google.com/spreadsheets/d/${googleDocument.fileId}/view`;
+  }
+
+  if (googleDocument.app === "presentation") {
+    return `https://docs.google.com/presentation/d/${googleDocument.fileId}/view`;
+  }
+
+  return `https://drive.google.com/file/d/${googleDocument.fileId}/view`;
 }
 
 export function groupDownloadsByCategory(downloads: StudentDownload[]) {

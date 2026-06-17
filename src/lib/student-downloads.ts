@@ -83,6 +83,24 @@ function getFallbackDownloads(segmento: StudentSegmentQuery): StudentDownload[] 
   );
 }
 
+function getLinkedFallbackDownloads(segmento: StudentSegmentQuery) {
+  return getFallbackDownloads(segmento).filter((document) => document.arquivo_url);
+}
+
+function mergeWithLinkedFallbackDownloads(
+  downloads: StudentDownload[],
+  segmento: StudentSegmentQuery,
+) {
+  const existingKeys = new Set(
+    downloads.map((document) => `${document.titulo}|${document.arquivo_url}`),
+  );
+  const linkedFallbackDownloads = getLinkedFallbackDownloads(segmento).filter(
+    (document) => !existingKeys.has(`${document.titulo}|${document.arquivo_url}`),
+  );
+
+  return [...linkedFallbackDownloads, ...downloads];
+}
+
 function getSegmentQueryValues(segmento: StudentSegmentQuery) {
   if (segmento === "medio") {
     return ["medio", "medio12", "medio3"];
@@ -103,7 +121,7 @@ export async function getStudentDownloads(segmento: StudentSegmentQuery) {
       return getFallbackDownloads(segmento);
     }
 
-    return data as StudentDownload[];
+    return mergeWithLinkedFallbackDownloads(data as StudentDownload[], segmento);
   } catch {
     return getFallbackDownloads(segmento);
   }
