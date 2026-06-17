@@ -125,10 +125,7 @@ export const studentDocuments = {
     "Horário CSF 2026 6º ao 9º ano",
   ],
   medio12: [
-    {
-      title: "Avaliações de Arte - EM 1ª série - 2ª Unidade",
-      href: "https://drive.google.com/file/d/1KXKfIFPQy6uoW4Gt44ybdtpS_iZfcI2l/view",
-    },
+    "Avaliações de Arte - EM 1ª série - 2ª Unidade",
     "Avaliações de Arte - EM 2ª série - 2ª Unidade",
     "Calendário Extraordinário - 2ª Unidade - EM 1ª a 3ª série",
     "Calendário de Avaliações 1ª e 2ª séries - 2ª Unidade - 2026",

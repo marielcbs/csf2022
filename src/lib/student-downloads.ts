@@ -97,8 +97,15 @@ function mergeWithLinkedFallbackDownloads(
   const linkedFallbackDownloads = getLinkedFallbackDownloads(segmento).filter(
     (document) => !existingKeys.has(`${document.titulo}|${document.arquivo_url}`),
   );
+  const linkedFallbackCategories = new Set(
+    linkedFallbackDownloads.map((document) => document.categoria),
+  );
+  const visibleDownloads = downloads.filter(
+    (document) =>
+      document.arquivo_url || !linkedFallbackCategories.has(document.categoria),
+  );
 
-  return [...linkedFallbackDownloads, ...downloads];
+  return [...linkedFallbackDownloads, ...visibleDownloads];
 }
 
 function getSegmentQueryValues(segmento: StudentSegmentQuery) {
