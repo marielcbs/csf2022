@@ -13,8 +13,7 @@ export default function Hero() {
           </h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-600 md:text-xl">
             Educação orientada por valores franciscanos, parceria educacional
-            COC e formação integral para cada etapa da vida escolar em
-            Alagoinhas.
+            COC e formação integral para cada etapa da vida escolar.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
