@@ -8,7 +8,7 @@ export default function AplicativosPage() {
           <strong>Aplicativos</strong>
         </h1>
         <p className="mt-6 text-xl leading-8 text-slate-700">
-          Baixe o nosso aplicativo para ter acesso aos Boletim On-line e Diário de Classe acesse.
+          Baixe o nosso aplicativo para ter acesso aos Boletim On-line e Diário de Classe.
         </p>
       </div>
 
