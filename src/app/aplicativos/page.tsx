@@ -8,8 +8,7 @@ export default function AplicativosPage() {
           <strong>Aplicativos</strong>
         </h1>
         <p className="mt-6 text-xl leading-8 text-slate-700">
-          Baixe e acesse os aplicativos e plataformas educacionais utilizados
-          pelo Colégio São Francisco.
+          Baixe o nosso aplicativo para ter acesso aos Boletim On-line e Diário de Classe acesse.
         </p>
       </div>
 
