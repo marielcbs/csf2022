@@ -15,10 +15,10 @@ export default function AplicativosPage() {
 
       <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
         <AppCard
-          title="Educacross"
-          description="Aprendizagem adaptativa por jogos."
-          image="/csf/logos/educacross.svg"
-          href="https://www.educacross.com.br"
+          title="Boletim e Agenda"
+          description="Acesso ao ambiente ProWeb."
+          image="/csf/icons/icon_aluno.svg"
+          href="https://web.prodados.net.br/ProWeb/SaoFrancisco/Login.aspx?ReturnUrl=%2fProWeb%2fSaoFrancisco"
         />
         <AppCard
           title="Programa Pleno"
@@ -32,13 +32,7 @@ export default function AplicativosPage() {
           image="/csf/logos/coc.svg"
           href="https://www.coc.com.br"
         />
-        <AppCard
-          title="Boletim e Agenda"
-          description="Acesso ao ambiente ProWeb."
-          image="/csf/icons/icon_aluno.svg"
-          href="https://web.prodados.net.br/ProWeb/SaoFrancisco/Login.aspx?ReturnUrl=%2fProWeb%2fSaoFrancisco"
-        />
-      </div>
+     </div>
     </main>
   );
 }
