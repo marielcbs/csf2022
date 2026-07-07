@@ -6,7 +6,7 @@ export const quickLinks = {
   outlook: "https://www.outlook.com/csfba.com.br",
   hino:
     "https://www.csfba.com.br/site/modulos/baixar.php?arquivo=../arquivos/HINOCSF.pdf",
-  whatsapp: "https://wa.me/557530312495",
+  whatsapp: "https://wa.me/557533661613",
   instagram: "https://www.instagram.com/csfba",
 };
 
@@ -47,11 +47,6 @@ export const partners = [
     title: "Programa Socioemocional",
     name: "Pleno",
     image: "/csf/logos/pleno.svg",
-  },
-  {
-    title: "Aprendizagem adaptativa de jogos",
-    name: "Educacross",
-    image: "/csf/logos/educacross.svg",
   },
   {
     title: "Ambiente colaborativo",
