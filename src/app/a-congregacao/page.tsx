@@ -4,7 +4,7 @@ export default function CongregacaoPage() {
       <section className="bg-slate-50 py-20 md:py-24">
         <div className="container-csf max-w-4xl">
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#1582b5]">
-            Instituto Irmãs Franciscanas Imaculatinas
+            Irmãs Franciscanas Imaculatinas
           </p>
           <h1 className="section-title mt-4">
             A <strong>Congregação</strong>
