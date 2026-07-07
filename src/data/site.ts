@@ -98,7 +98,7 @@ export const values = [
 ];
 
 export const footerContact = {
-  phone: "75 3031-2495",
+  phone: "75 3366-1613",
   email: "secretaria@csfba.com.br",
   jobs: "vagas@csfba.com.br",
   address: "Av. Lauro de Freitas, 198 - Centro, Alagoinhas/BA",
