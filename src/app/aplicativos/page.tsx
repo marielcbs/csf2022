@@ -20,19 +20,7 @@ export default function AplicativosPage() {
           image="/csf/icons/icon_aluno.svg"
           href="https://web.prodados.net.br/ProWeb/SaoFrancisco/Login.aspx?ReturnUrl=%2fProWeb%2fSaoFrancisco"
         />
-        <AppCard
-          title="Programa Pleno"
-          description="Programa socioemocional."
-          image="/csf/logos/pleno.svg"
-          href="https://portal.programapleno.com.br/login"
-        />
-        <AppCard
-          title="Portal COC"
-          description="Ambiente digital do Sistema COC."
-          image="/csf/logos/coc.svg"
-          href="https://www.coc.com.br"
-        />
-     </div>
+      </div>
     </main>
   );
 }
