@@ -7,7 +7,7 @@ export default async function MedioPrimeiraSegundaPage() {
 
   return (
     <StudentAreaPage
-      title="Ens. Medio - 1a e 2a serie"
+      title="Ens. Medio - 1ª e 2ª serie"
       description={studentAreas[2].description}
       downloads={downloads}
     />

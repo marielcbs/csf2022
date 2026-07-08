@@ -7,7 +7,7 @@ export default async function FundamentalPage() {
 
   return (
     <StudentAreaPage
-      title="Ens. Fundamental - 6o ao 9o ano"
+      title="Ens. Fundamental - 6º ao 9º ano"
       description={studentAreas[1].description}
       downloads={downloads}
     />
