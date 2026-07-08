@@ -64,7 +64,7 @@ export default function AdminLoginForm() {
 
       <input
         type="email"
-        value={}
+        value={email}
         onChange={(event) => setEmail(event.target.value)}
         className="w-full rounded border p-3"
         placeholder=""
