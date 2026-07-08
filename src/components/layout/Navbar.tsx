@@ -155,7 +155,7 @@ export default function Navbar() {
         </button>
         <button
           type="button"
-          className="flex h-14 items-center justify-center gap-2 border-l border-white/20 text-sm font-bold uppercase text-white"
+          className="flex h-14 items-center justify-center gap-2 border-l border-white/20 text-sm font-bold text-white"
           onClick={() => setOpenPanel("professor")}
         >
           <img
@@ -220,7 +220,7 @@ function OverlayPanel({
       </button>
       <div className="container-csf flex min-h-screen items-center justify-center py-24">
         <div className="w-full max-w-3xl text-center">
-          <p className="mb-8 text-sm font-bold uppercase tracking-[0.25em] text-[#79d6ff]">
+          <p className="mb-8 text-sm font-bold tracking-[0.25em] text-[#79d6ff]">
             {title}
           </p>
           <div className="grid gap-4 text-2xl font-semibold md:text-3xl">
