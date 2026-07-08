@@ -89,7 +89,7 @@ export default function Navbar() {
             </div>
           </nav>
 
-          <div className="ml-16 flex items-center">
+          <div className="ml-16 flex items-center gap-2">
             <AccountDropdown
               title="Aluno"
               icon="/csf/icons/icon_aluno.svg"
@@ -290,7 +290,7 @@ function AccountDropdown({
     <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
       <button
         type="button"
-        className="inline-flex h-12 items-center gap-2 rounded-md border border-slate-300 bg-white px-5 text-base font-bold uppercase text-[#102a4c] transition hover:border-[#0d8cc4] hover:text-[#0d8cc4]"
+        className="inline-flex h-12 items-center gap-2 rounded-md border border-slate-300 bg-transparent px-5 text-base font-bold uppercase text-[#102a4c] transition hover:border-[#0d8cc4] hover:text-[#0d8cc4] focus:outline-none focus:ring-2 focus:ring-[#0d8cc4]/25"
         onClick={onToggle}
       >
         <img className="h-5 w-5" src={icon} alt="" />
