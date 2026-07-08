@@ -1,7 +1,5 @@
 "use client";
 
-
-import { Button } from '@/components/button';
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { quickLinks, studentAreas } from "@/data/site";
@@ -292,10 +290,10 @@ function AccountDropdown({
     <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
       <button
         type="button"
-        className="inline-flex h-12 items-center gap-2 bg-[#079ee3] px-5 text-base font-bold uppercase text-white transition hover:bg-[#0588c5]"
+        className="inline-flex h-12 items-center gap-2 rounded-md border border-slate-300 bg-white px-5 text-base font-bold uppercase text-[#102a4c] transition hover:border-[#0d8cc4] hover:text-[#0d8cc4]"
         onClick={onToggle}
       >
-        <img className="h-5 w-5 brightness-0 invert" src={icon} alt="" />
+        <img className="h-5 w-5" src={icon} alt="" />
         {title}
       </button>
       <div
