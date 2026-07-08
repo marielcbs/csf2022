@@ -67,7 +67,7 @@ export default function AdminLoginForm() {
         value={email}
         onChange={(event) => setEmail(event.target.value)}
         className="w-full rounded border p-3"
-        placeholder="Email"
+        placeholder=""
       />
 
       <button
@@ -75,7 +75,7 @@ export default function AdminLoginForm() {
         disabled={loading}
         className="w-full rounded bg-[#0f2f5f] px-4 py-3 font-semibold text-white disabled:opacity-70"
       >
-        {loading ? "Enviando..." : "Enviar Magic Link"}
+        {loading ? "Enviando..." : "Solicitar Acesso"}
       </button>
 
       {visibleMessage ? (
