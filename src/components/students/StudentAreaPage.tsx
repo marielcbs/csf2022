@@ -16,9 +16,9 @@ export default function StudentAreaPage({
       <section className="bg-slate-50 py-16 md:py-24">
         <div className="container-csf">
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#1582b5]">
-            Area do Aluno
+            Área do Aluno
           </p>
-          <h1 className="section-title mt-4">
+          <h1 className="section-title mt-3">
             <strong>{title}</strong>
           </h1>
           <p className="mt-6 max-w-4xl text-xl leading-9 text-slate-700">
