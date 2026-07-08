@@ -61,10 +61,10 @@ export default function AdminLoginForm() {
 
       <input
         type="email"
-        value="insira sua credêncial"
+        value=""
         onChange={(event) => setEmail(event.target.value)}
         className="w-full rounded border p-3"
-        placeholder=""
+        placeholder="insira sua credencial"
       />
 
       <button
