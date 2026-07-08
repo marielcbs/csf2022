@@ -143,7 +143,7 @@ export default function Navbar() {
       <div className="grid grid-cols-2 border-t border-[#079ee3]/20 bg-[#079ee3] md:hidden">
         <button
           type="button"
-          className="flex h-14 items-center justify-center gap-2 text-sm font-bold uppercase text-white"
+          className="flex h-14 items-center justify-center gap-2 text-sm font-bold text-white"
           onClick={() => setOpenPanel("aluno")}
         >
           <img
@@ -290,7 +290,7 @@ function AccountDropdown({
     <div className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
       <button
         type="button"
-        className="inline-flex h-12 items-center gap-2 rounded-md border border-slate-300 bg-transparent px-5 text-base font-bold uppercase text-[#102a4c] transition hover:border-[#0d8cc4] hover:text-[#0d8cc4] focus:outline-none focus:ring-2 focus:ring-[#0d8cc4]/25"
+        className="inline-flex h-12 items-center gap-2 rounded-md border border-slate-300 bg-transparent px-5 text-base font-bold text-[#102a4c] transition hover:border-[#0d8cc4] hover:text-[#0d8cc4] focus:outline-none focus:ring-2 focus:ring-[#0d8cc4]/25"
         onClick={onToggle}
       >
         <img className="h-5 w-5" src={icon} alt="" />
