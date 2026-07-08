@@ -57,14 +57,11 @@ export default function AdminLoginForm() {
         <h1 className="text-3xl font-bold">
           Painel Administrativo
         </h1>
-        <p className="mt-2 text-sm text-gray-600">
-          Insira sua credêncial
-        </p>
-      </div>
+     </div>
 
       <input
         type="email"
-        value={email}
+        value="insira sua credêncial"
         onChange={(event) => setEmail(event.target.value)}
         className="w-full rounded border p-3"
         placeholder=""
