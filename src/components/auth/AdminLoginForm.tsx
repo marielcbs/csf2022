@@ -6,9 +6,9 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 const adminEmail = "cap@csfba.com.br";
 const errorMessages: Record<string, string> = {
-  "missing-code": "O link recebido nao trouxe o codigo de autenticacao.",
-  exchange: "Nao foi possivel validar o Magic Link. Gere um novo link.",
-  unauthorized: "Este email nao esta autorizado para o painel.",
+  "missing-code": "O link recebido.",
+  exchange: "Indisponível no momento.",
+  unauthorized: "Entre em contato com setor responsável.",
 };
 
 export default function AdminLoginForm() {
@@ -44,11 +44,11 @@ export default function AdminLoginForm() {
     setLoading(false);
 
     if (error) {
-      setMessage(`Erro ao enviar o Magic Link: ${error.message}`);
+      setMessage(`Acesso Solicitado: ${error.message}`);
       return;
     }
 
-    setMessage("Magic Link enviado. Verifique o e-mail cap@csfba.com.br.");
+    setMessage("Obrigado!");
   }
 
   return (
@@ -58,7 +58,7 @@ export default function AdminLoginForm() {
           Painel Administrativo
         </h1>
         <p className="mt-2 text-sm text-gray-600">
-          Acesso por Magic Link do Supabase Auth.
+          Insira sua credêncial
         </p>
       </div>
 
