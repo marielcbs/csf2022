@@ -45,7 +45,7 @@ export default function StudentAreaPage({
         </div>
       </section>
 
-      <section className="container-csf py-16">
+      <section className="container-csf py-8">
         <StudentDownloadsPanel downloads={downloads} />
       </section>
     </main>
