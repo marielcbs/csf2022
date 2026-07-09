@@ -37,16 +37,16 @@ export default function Hero() {
             muted
             loop
             playsInline
-            className="aspect-[16/9] w-full object-cover"
+            className="w-full object-cover"
           >
             <source src="/csf/videos/05csf.webm" type="video/webm" />
             <source src="/videos/hero.mp4" type="video/mp4" />
           </video>
-          <div className="absolute left-4 top-4 rounded-lg bg-white/92 px-4 py-3 text-left shadow-lg backdrop-blur md:left-6 md:top-6">
-            <p className="text-xs font-black uppercase tracking-[0.16em] text-[#0d8cc4]">
+          <div className="absolute left-3 top-3 max-w-[75%] rounded-lg bg-white/92 px-3 py-2 text-left shadow-lg backdrop-blur md:left-6 md:top-6 md:max-w-none md:px-4 md:py-3">
+            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#0d8cc4] md:text-xs md:tracking-[0.16em]">
               CSF em movimento
             </p>
-            <p className="mt-1 text-sm font-bold text-[#102a4c]">
+            <p className="mt-0.5 text-xs font-bold leading-snug text-[#102a4c] md:mt-1 md:text-sm">
               Formação humana, acadêmica e socioemocional.
             </p>
           </div>
