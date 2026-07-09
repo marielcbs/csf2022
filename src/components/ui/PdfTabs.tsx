@@ -11,11 +11,11 @@ type Arquivo = {
 
 const tabs = [
   {
-    label: "Calendarios",
+    label: "Calendários",
     value: "calendario",
   },
   {
-    label: "Horarios",
+    label: "Horários",
     value: "horario",
   },
   {
