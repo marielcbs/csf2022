@@ -7,13 +7,7 @@ export default async function InfantilFundamentalPage() {
 
   return (
     <StudentAreaPage
-      title={
-        <>
-          Ed. Infantil - G5 / Ens. Fundamental
-          <br />
-          1º ao 5º ano
-        </>
-      }
+      title="Ed. Infantil - G5 / Ens. Fundamental - 1º ao 5º ano"
       description={studentAreas[0].description}
       downloads={downloads}
     />
