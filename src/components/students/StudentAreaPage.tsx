@@ -18,9 +18,9 @@ export default function StudentAreaPage({
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#1582b5]">
             Área do Aluno
           </p>
-          <h1 className="section-title mt-3 text-2xl">
+          <h2 className="section-title mt-3">
             <strong>{title}</strong>
-          </h1>
+          </h2>
           <p className="mt-6 max-w-4xl text-xl leading-9 text-slate-700">
             {description}
           </p>
