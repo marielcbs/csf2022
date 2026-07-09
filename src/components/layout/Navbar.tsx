@@ -140,7 +140,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 border-t border-[#079ee3]/20 bg-[#079ee3] md:hidden">
+      <div className="grid grid-cols-2 border-t border-[#079ee3]/20 bg-[#079ee3] lg:hidden">
         <button
           type="button"
           className="flex h-14 items-center justify-center gap-2 text-sm font-bold text-white"
