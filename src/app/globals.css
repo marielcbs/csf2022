@@ -27,7 +27,7 @@ body {
 
 .section-title {
   color: var(--csf-blue);
-  font-size: clamp(2.35rem, 5vw, 4.8rem);
+  font-size: clamp(2rem, 4vw, 4.7rem);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: 0;
