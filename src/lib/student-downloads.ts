@@ -122,7 +122,7 @@ export async function getStudentDownloads(segmento: StudentSegmentQuery) {
     const { data, error } = await supabase
       .from("arquivos")
       .select("id,titulo,categoria,segmento,arquivo_url")
-      .in("segmento", getSegmentQueryValues(segmento));
+      .in("segmento", getSegmentQueryValues(segmento))
       .order("created_at", { ascending: false });
 
     if (error || !data || data.length === 0) {
