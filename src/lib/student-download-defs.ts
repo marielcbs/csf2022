@@ -21,7 +21,7 @@ export type StudentDownload = {
   categoria: StudentCategory;
   segmento: StudentSegment | "medio";
   arquivo_url: string;
-  created_at: string;
+  created_at?: string;
 };
 
 type GoogleDocumentUrl = {
