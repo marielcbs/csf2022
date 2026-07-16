@@ -123,6 +123,7 @@ export async function getStudentDownloads(segmento: StudentSegmentQuery) {
       .from("arquivos")
       .select("id,titulo,categoria,segmento,arquivo_url")
       .in("segmento", getSegmentQueryValues(segmento));
+      .order("created_at", { ascending: false });
 
     if (error || !data || data.length === 0) {
       return getFallbackDownloads(segmento);
