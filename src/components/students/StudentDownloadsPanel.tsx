@@ -19,7 +19,7 @@ export default function StudentDownloadsPanel({ downloads }: Props) {
     studentCategoryOptions[0].value,
   );
   const groupedDownloads = groupDownloadsByCategory(downloads);
-  const activeDownloads = groupedDownloads[activeCategory];
+  const activeDownloads = groupedDownloads[activeCategory] ?? [])].reverse();
 
   return (
     <>
