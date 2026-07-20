@@ -137,9 +137,9 @@ export function groupDownloadsByCategory(downloads: StudentDownload[]) {
       return groups;
     },
     {
-      calendario: [],
+      calendário: [],
       atualidade: [],
-      horario: [],
+      horário: [],
     },
   );
 }
