@@ -1,7 +1,7 @@
 export const studentCategoryOptions = [
-  { value: "calendario", label: "Calendarios" },
+  { value: "calendario", label: "Calendários" },
   { value: "atualidade", label: "Atualidades" },
-  { value: "horario", label: "Horarios" },
+  { value: "horario", label: "Horários" },
 ] as const;
 
 export const studentSegmentOptions = [
@@ -137,9 +137,9 @@ export function groupDownloadsByCategory(downloads: StudentDownload[]) {
       return groups;
     },
     {
-      calendário: [],
+      calendario: [],
       atualidade: [],
-      horário: [],
+      horario: [],
     },
   );
 }
