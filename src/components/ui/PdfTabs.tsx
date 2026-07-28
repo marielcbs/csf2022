@@ -45,7 +45,6 @@ export default function PdfTabs({ segmento }: Props) {
       const supabase = createSupabaseBrowserClient();
       const { data, error } = await supabase
         .from("arquivos")
-        // inclui created_at e ordena do mais recente para o mais antigo
         .select("id,titulo,arquivo_url,created_at")
         .eq("segmento", segmento)
         .eq("categoria", active.value)
