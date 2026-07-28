@@ -7,6 +7,7 @@ type Arquivo = {
   id: string | number;
   titulo: string;
   arquivo_url: string;
+  created_at?: string;
 };
 
 const tabs = [
@@ -44,9 +45,11 @@ export default function PdfTabs({ segmento }: Props) {
       const supabase = createSupabaseBrowserClient();
       const { data, error } = await supabase
         .from("arquivos")
-        .select("id,titulo,arquivo_url")
+        // inclui created_at e ordena do mais recente para o mais antigo
+        .select("id,titulo,arquivo_url,created_at")
         .eq("segmento", segmento)
-        .eq("categoria", active.value);
+        .eq("categoria", active.value)
+        .order("created_at", { ascending: false });
 
       if (ignore) {
         return;
