@@ -16,13 +16,13 @@ export default function Footer() {
           </Link>
           <a
             className="font-semibold text-[#79d6ff]"
-            href="https://www.csfba.com.br/app/edital-de-matriculas"
+            href="https://www.csfba.com.br/edital_matricula_2027"
           >
             Edital de Matrículas
           </a>
           <a
             className="font-semibold text-[#79d6ff]"
-            href="https://www.csfba.com.br/app/edital-filantropia"
+            href="https://www.csfba.com.br/edital_filantropia_2027"
           >
             Edital de Filantropia
           </a>
